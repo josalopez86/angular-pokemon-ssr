@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector:"pricing-page",
@@ -6,4 +7,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: "./pricing-page.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PricingPage {}
+export default class PricingPage implements OnInit {
+  private title = inject(Title);
+  private meta = inject(Meta);
+
+  ngOnInit(): void {
+    this.title.setTitle("Pricing Page");
+    this.meta.updateTag({name: "description", content: "meta-description pricing page"});
+  }
+}
